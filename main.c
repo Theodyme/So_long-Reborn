@@ -1,37 +1,41 @@
 #include "lib.h"
 
-void    init_map_data(char *filename, t_map **map_data)
+void    print_err(char *str, char *call)
 {
-   *map_data = malloc(sizeof(t_map));
-    if (!*map_data)
+        printf(RED "[error]: " DEFAULT);
+        if (str)
+            printf("%s", str);
+        if (call)
+            printf(BLACK " [%s]\n" DEFAULT, call);
         return ;
-    count_map_height(filename, map_data);
-    printf("%d\n", (*map_data)->y);
-    (*map_data)->map = malloc(sizeof(char *) * (*map_data)->y);
-    (*map_data)->x = 0;
-    printf(BLUE "[log]: " DEFAULT);
-    printf("initiated map data.\n");
-    return ;
 }
 
-void    free_map_data(t_map **map_data)
+void    print_success(char *str, char *call)
 {
-    (*map_data)->y--;
-    while ((*map_data)->y >= 0)
-    {
-        free((*map_data)->map[(*map_data)->y]);
-        (*map_data)->y--;
-    }
-    free((*map_data)->map);
-    free(*map_data);
-    *map_data = NULL;
-    return ;
+        printf(GREEN "[log]: " DEFAULT);
+        if (str)
+            printf("%s", str);
+        if (call)
+            printf(BLACK " [%s]\n" DEFAULT, call);
+        return ;
 }
+
+void    print_log(char *str, char *call)
+{
+        printf(BLUE "[log]: " DEFAULT);
+        if (str)
+            printf("%s", str);
+        if (call)
+            printf(BLACK " [%s]\n" DEFAULT, call);
+        return ;
+}
+
 
 int     main(int ac, char **av)
 {
-    char    *filename;
-    t_map   *map_data;
+    char        *filename;
+    t_map       *map_data;
+    t_game_data *game_data;
 
     if (ac != 2)
     {
@@ -46,12 +50,20 @@ int     main(int ac, char **av)
     init_map_data(filename, &map_data);
     if (!map_data)
         return EXIT_FAILURE;
+    init_game_data(&game_data);
+    if (!game_data)
+        return EXIT_FAILURE;
     if (open_map(filename, &map_data) == EXIT_FAILURE)
     {
         printf(RED "[log]: " DEFAULT);
         printf("failure opening [%s]. aborting.\n", filename);
     }
+    data_builder(&map_data, &game_data);
+
+    flood_fill_call(&map_data, &game_data);
+
     free(filename);
+    free(game_data);
     free_map_data(&map_data);
     return EXIT_SUCCESS;
 }
