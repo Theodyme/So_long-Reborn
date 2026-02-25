@@ -19,12 +19,12 @@ char    *trim_newline(char *str)
     return str;        
 }
 
-int count_map_height(char *filename, t_map **map_data)
+int count_map_height(char *filename, t_map *map_data)
 {
     int fd;
     char *line;
 
-    (*map_data)->y = 0;
+    map_data->y = 0;
     line = NULL;
     fd = open(filename, O_RDONLY);
     if (fd == -1) {
@@ -40,16 +40,16 @@ int count_map_height(char *filename, t_map **map_data)
         printf(BLACK "[COUNTING HEIGHT]\n" DEFAULT);
         free(line);
         line = get_next_line(fd);
-        (*map_data)->y++;
+        map_data->y++;
     }
     close(fd);
     printf(BLUE "[log]: " DEFAULT);
-    printf("found [%d] lines for the height of the map. ", (*map_data)->y);
+    printf("found [%d] lines for the height of the map. ", map_data->y);
     printf(BLACK "[COUNTING HEIGHT]\n" DEFAULT);
     return (EXIT_SUCCESS);
 }
 
-int open_map(char *filename, t_map **map_data)
+int open_map(char *filename, t_map *map_data)
 {
     int fd;
     char *line;
@@ -69,12 +69,12 @@ int open_map(char *filename, t_map **map_data)
         printf(BLUE "[log]: " DEFAULT);
         printf("opened line [%s] ... ", trim_newline(line));
         printf(BLACK "[OPEN MAP]\n" DEFAULT);
-        (*map_data)->map[i++] = ft_strdup(trim_newline(line));
+        map_data->map[i++] = ft_strdup(trim_newline(line));
         free(line);
         line = get_next_line(fd);
     }
     free(line);
-    (*map_data)->map[i] = NULL;
+    map_data->map[i] = NULL;
     close(fd);
     return (EXIT_SUCCESS);
 }

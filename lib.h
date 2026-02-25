@@ -8,6 +8,8 @@
 # include <string.h>
 # include <stdio.h>
 
+# include "mlx/mlx.h"
+
 // INCLUDE PRINTF HERE
 // INCLUDE GNL HERE
 # include "gnl/get_next_line.h"
@@ -19,7 +21,7 @@
 # define CYAN "\e[0;36m"
 # define GREEN "\e[0;32m"
 
-# define TILESIZE 20
+# define TILESIZE 32
 # define CHARA "textures/character.xpm"
 # define WALL "textures/wall.xpm"
 # define FLOOR "textures/floor.xpm"
@@ -28,26 +30,49 @@
 # define START "textures/start.xpm"
 # define BACKGROUND "textures/background.xpm"
 
-typedef struct s_map
+typedef struct	s_map
 {
-	char	**map;
-	int		y;
-	int		x;
+	char		**map;
+	int			y;
+	int			x;
 }				t_map;
 
-typedef struct s_assets
+typedef struct	s_img
 {
+	void		*img_ptr;
+	char		*addr;
+	int			height;
+	int			width;
+	int			bpp;
+	int			endian;
+	int			line_len;
+}				t_img;
 
-}				t_assets;
+// typedef struct	s_data {
+// 	void		*img;
+// }				t_data;
 
-typedef struct s_game_data
+// typedef struct	s_assets
+// {
+// 	t_data		*floor;
+// }				t_assets;
+
+typedef struct	s_mlx_data
 {
-	int			player;
+	void		*mlx;
+	void		*win;
+}				t_mlx_data;
+
+typedef struct	s_game_data
+{
 	int			exit;
 	int			items;
 	int			pposx;
 	int			pposy;
-	// t_assets	assets;
+	t_mlx_data	*mlx;
+	t_img		*img;
+	t_map		*map;
+	t_assets	*assets;
 }				t_game_data;
 
 size_t	ft_strlen(const char *str);
@@ -61,18 +86,22 @@ void	print_success(char *str, char *call);
 
 char	*trim_newline(char *str);
 
-int		init_map_data(char *filename, t_map **map_data);
-int		init_game_data(t_game_data **game_data);
-int		data_builder(t_map **map_data, t_game_data **game_data);
+int		init_map_data(char *filename, t_map *map_data);
+int		init_game_data(t_game_data *game_data);
+int		data_builder(t_map *map_data, t_game_data *game_data);
 
-void	free_map_data(t_map **map_data);
+void	free_map_data(t_map *map_data);
 
-int		count_map_height(char *filename, t_map **map_data);
-int		open_map(char *filename, t_map **map_data);
+int		count_map_height(char *filename, t_map *map_data);
+int		open_map(char *filename, t_map *map_data);
 
-char	**map_cpy(t_map **map_data);
-int		flood_fill_call(t_map **map_data, t_game_data **game_data);
-int		is_oce(char c, int *items, t_game_data **game_data);
-int		flood_fill(char **map, int posy, int posx, t_game_data **game_data, int *items);
+char	**map_cpy(t_map *map_data);
+int		flood_fill_call(t_map *map_data, t_game_data *game_data);
+int		is_oce(char c, int *items, t_game_data *game_data);
+int		flood_fill(char **map, int posy, int posx, t_game_data *game_data, int *items);
+
+void    load_assets(t_game_data *data);
+void    init_window(t_game_data *data);
+int    launch_game(t_game_data *data);
 
 #endif
