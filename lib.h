@@ -21,6 +21,9 @@
 # define CYAN "\e[0;36m"
 # define GREEN "\e[0;32m"
 
+# define HEIGHT 650
+# define WIDTH 920
+
 # define TILESIZE 32
 # define CHARA "textures/character.xpm"
 # define WALL "textures/wall.xpm"
@@ -39,7 +42,7 @@ typedef struct	s_map
 
 typedef struct	s_img
 {
-	void		*img_ptr;
+	void		*ptr;
 	char		*addr;
 	int			height;
 	int			width;
@@ -59,7 +62,7 @@ typedef struct	s_img
 
 typedef struct	s_mlx_data
 {
-	void		*mlx;
+	void		*mlx_ptr;
 	void		*win;
 }				t_mlx_data;
 
@@ -72,7 +75,7 @@ typedef struct	s_game_data
 	t_mlx_data	*mlx;
 	t_img		*img;
 	t_map		*map;
-	t_assets	*assets;
+	// t_assets	*assets;
 }				t_game_data;
 
 size_t	ft_strlen(const char *str);
