@@ -15,6 +15,7 @@ SRCS	=	main.c \
 			free_data.c \
 			flood_fill.c \
 			game.c \
+			drawing_tools.c \
 			utils_lib/ft_strdup.c \
 			gnl/get_next_line.c \
 			gnl/get_next_line_utils.c

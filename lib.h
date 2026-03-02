@@ -78,33 +78,38 @@ typedef struct	s_game_data
 	// t_assets	*assets;
 }				t_game_data;
 
-size_t	ft_strlen(const char *str);
-char	*ft_strdup(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_is_in_charset(char *str, char *charset);
+size_t			ft_strlen(const char *str);
+char			*ft_strdup(const char *src);
+void			*ft_calloc(size_t count, size_t size);
+int				ft_is_in_charset(char *str, char *charset);
 
-void	print_err(char *str, char *call);
-void	print_log(char *str, char *call);
-void	print_success(char *str, char *call);
+void			print_err(char *str, char *call);
+void			print_log(char *str, char *call);
+void			print_success(char *str, char *call);
 
-char	*trim_newline(char *str);
+char			*trim_newline(char *str);
 
-int		init_map_data(char *filename, t_map *map_data);
-int		init_game_data(t_game_data *game_data);
-int		data_builder(t_map *map_data, t_game_data *game_data);
+int				init_map_data(char *filename, t_map *map_data);
+int				init_game_data(t_game_data *game_data);
+int				data_builder(t_map *map_data, t_game_data *game_data);
 
-void	free_map_data(t_map *map_data);
+void			free_map_data(t_map *map_data);
 
-int		count_map_height(char *filename, t_map *map_data);
-int		open_map(char *filename, t_map *map_data);
+int				count_map_height(char *filename, t_map *map_data);
+int				open_map(char *filename, t_map *map_data);
 
-char	**map_cpy(t_map *map_data);
-int		flood_fill_call(t_map *map_data, t_game_data *game_data);
-int		is_oce(char c, int *items, t_game_data *game_data);
-int		flood_fill(char **map, int posy, int posx, t_game_data *game_data, int *items);
+char			**map_cpy(t_map *map_data);
+int				flood_fill_call(t_map *map_data, t_game_data *game_data);
+int				is_oce(char c, int *items, t_game_data *game_data);
+int				flood_fill(char **map, int posy, int posx, t_game_data *game_data, int *items);
 
-void    load_assets(t_game_data *data);
-void    init_window(t_game_data *data);
-int    launch_game(t_game_data *data);
+t_img       	open_xpm(char * path, t_game_data *data);
+void    		put_pixel(t_img idata, int x, int y, int color);
+unsigned int	get_pixel(t_img idata, int x, int y);
+void			superpose_at(t_img dst, t_img src, int x, int y);
+
+void			load_assets(t_game_data *data);
+void			init_window(t_game_data *data);
+int				launch_game(t_game_data *data);
 
 #endif
