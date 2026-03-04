@@ -35,7 +35,7 @@ CFLAGS	=	-Wall -Wextra -Werror
 $(NAME):	${OBJ} Makefile
 # 	@make --no-print-directory -C ft_printf
 	@make --no-print-directory -C mlx
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB) -lXext -lX11
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB) -lXext -lX11 -lm -lbsd
 	@make clean
 	@echo "$(GREEN)Compiled $(NAME) :)$(END_COLOR)"
 
@@ -46,7 +46,7 @@ clean:
 	@echo "$(YELLOW)Removed object files.$(END_COLOR)"
 
 fclean: clean
-	@make fclean --no-print-directory -C ft_printf
+# 	@make fclean --no-print-directory -C ft_printf
 	@make clean --no-print-directory -C mlx
 	@rm -f ${NAME}
 	@echo "$(YELLOW)Cleaned libraries and $(NAME) executable.$(END_COLOR)"

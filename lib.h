@@ -21,17 +21,19 @@
 # define CYAN "\e[0;36m"
 # define GREEN "\e[0;32m"
 
-# define HEIGHT 650
-# define WIDTH 920
-
-# define TILESIZE 32
-# define CHARA "textures/character.xpm"
+# define TILESIZE 108
+# define PLAYER_XSIZE 114
+# define PLAYER_YSIZE 64
+# define CHARA "textures/charatest.xpm"
 # define WALL "textures/wall.xpm"
-# define FLOOR "textures/floor.xpm"
+# define FLOOR "textures/tiletest.xpm"
 # define ITEM "textures/item.xpm"
 # define EXIT "textures/exit.xpm"
 # define START "textures/start.xpm"
 # define BACKGROUND "textures/background.xpm"
+
+# define HEIGHT 900
+# define WIDTH 1200
 
 typedef struct	s_map
 {
