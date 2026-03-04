@@ -16,9 +16,9 @@ SRCS	=	main.c \
 			flood_fill.c \
 			game.c \
 			drawing_tools.c \
-			utils_lib/ft_strdup.c \
 			gnl/get_next_line.c \
-			gnl/get_next_line_utils.c
+			gnl/get_next_line_utils.c \
+			lib/ft_strdup.c
 LIB		=	mlx/libmlx_Linux.a
 OBJ		=	${SRCS:.c=.o}
 NAME	=	so_long

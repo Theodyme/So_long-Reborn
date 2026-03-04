@@ -43,6 +43,10 @@ int    data_builder(t_map *map_data, t_game_data *game_data)
         }
         i++;
     }
+	map_data->y = i;
+	map_data->x = j;
+	print_log(NULL, NULL);
+	printf("map size is [%d][%d]\n", map_data->y, map_data->x);
     print_log(NULL, NULL);
     printf("found %d exit, %d player, %d item(s).\n", game_data->exit, game_data->pposx ? 1 : 0, game_data->items);
     print_log(NULL, NULL);

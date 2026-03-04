@@ -39,33 +39,36 @@ void draw_iso_floor_only(t_game_data *data)
     int offset_x = floor.width / 2;
 	int offset_y = (floor.width / 2) / 2;
 
-	superpose_at(*data->img, floor, 0, 0);
-	superpose_at(*data->img, floor, 0 + offset_x + 1, 0 + offset_y + 1);
+	int margin = TILESIZE * data->map->y / 2;
+	int i = 0;
+	int j = 0;
 	int x = 0;
 	int y = 0;
-	int i = 0;
-	printf("x is [%d]\n", data->map->x);
-	while (i <= data->map->x)
+	while (j <= data->map->y)
 	{
-		superpose_at(*data->img, floor, x, y);
-		x += offset_x;
-		y += offset_y;
-		i++;
+		x = (margin * 2) - (j * offset_x);
+		y = margin + (j * offset_y);
+		i = 0;
+		while (i <= data->map->x)
+		{
+			superpose_at(*data->img, floor, x, y);
+			x += offset_x;
+			y += offset_y;
+			i++;
+		}
+		j++;
 	}
-
-    // while (data->map->map[y])
-    // {
-    //     x = 0;
-    //     while (data->map->map[x])
-    //     {
-    //         int iso_x = (x) + offset_x;
-    //         int iso_y = (y) + offset_y;
-
-    //         superpose_at(*data->img, floor, iso_x, iso_y);
-    //         x++;
-    //     }
-    //     y++;
-    // }
+		// while (i <= data->map->x)
+	// 	{
+	// 		// x = margin + j * offset_x;
+	// 		// y = 0 + j * offset_y;
+	// 		print_log(NULL, NULL);
+	// 		printf("printing asset at position [%d][%d]\n", y, x);
+	// 		superpose_at(*data->img, floor, x, y);
+	// 		x += offset_x;
+	// 		y += offset_y;
+	// 		i++;
+	// 	}
 }
 
 void    init_window(t_game_data *data)
@@ -84,6 +87,7 @@ void    init_window(t_game_data *data)
 
 int    launch_game(t_game_data *data)
 {
+	printf("LAUNCH GAME = x is [%d]\n", data->map->x);
     init_structs(data);
     init_window(data);
     return EXIT_SUCCESS;

@@ -66,22 +66,22 @@ int    is_oce(char c, int *items, t_game_data *game_data)
 
 int flood_fill(char **map, int posy, int posx, t_game_data *game_data, int *items)
 {
-    if (map[posy][posx - 1] && is_oce(map[posy][posx - 1], items, game_data))
+    if (map[posy] && map[posy][posx - 1] && is_oce(map[posy][posx - 1], items, game_data))
     {
         map[posy][posx - 1] = 'F';
         flood_fill(map, posy, posx - 1, game_data, items);
     }
-    if (map[posy][posx + 1] && is_oce(map[posy][posx + 1], items, game_data))
+    if (map[posy] && map[posy][posx + 1] && is_oce(map[posy][posx + 1], items, game_data))
     {
         map[posy][posx + 1] = 'F';
         flood_fill(map, posy, posx + 1, game_data, items);
     }
-    if (map[posy - 1][posx] && is_oce(map[posy - 1][posx], items, game_data))
+    if (map[posy] && map[posy - 1][posx] && is_oce(map[posy - 1][posx], items, game_data))
     {
         map[posy - 1][posx] = 'F';
         flood_fill(map, posy - 1, posx, game_data, items);
     }
-    if (map[posy + 1][posx] && is_oce(map[posy + 1][posx], items, game_data))
+    if (map[posy] && map[posy + 1][posx] && is_oce(map[posy + 1][posx], items, game_data))
     {
         map[posy + 1][posx] = 'F';
         flood_fill(map, posy + 1, posx, game_data, items);
